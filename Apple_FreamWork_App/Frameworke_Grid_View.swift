@@ -61,28 +61,3 @@ struct FrameworkeTitle_views: View {
 }
 
 
-struct Framework_Internal_View: View {
-    
-    let framework: Framework
-    
-    var body: some View {
-        VStack{
-            Image(framework.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 90, height: 90)
-            Text(framework.description)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
-                .padding()
-            
-            Button(action: {
-                UIApplication.shared.open(URL(string: framework.url)!)
-            }) {
-                
-            }
-        }
-    }
-}
