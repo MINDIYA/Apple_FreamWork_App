@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import Combine
 
-struct FrameWorkGridVeiwModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+final class FrameWorkGridVeiwModel: ObservableObject {
+    
+    var selectedFrameWork : Framework?{
+        didSet {
+            isShowingDetailView = true
+        }
     }
+    @Published var isShowingDetailView:Bool = false
+    
 }
 
-#Preview {
-    FrameWorkGridVeiwModel()
-}

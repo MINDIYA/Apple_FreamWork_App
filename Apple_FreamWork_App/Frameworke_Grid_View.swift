@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
-let columns: [GridItem] = [GridItem(.flexible()),
-                           GridItem(.flexible()),
-                           GridItem(.flexible())]
+
 
 struct Frameworke_Grid_View: View {
+    
+    @StateObject private var veiwModel = FrameWorkGridVeiwModel()
+    
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible())]
     var body: some View {
         
         NavigationView{
@@ -18,6 +22,9 @@ struct Frameworke_Grid_View: View {
                 LazyVGrid(columns: columns) {
                     ForEach(MockData.frameworks) { framework in
                         FrameworkeTitle_views(framework: framework)
+                            .onTapGesture {
+                                veiwModel.selectedFrameWork = framework
+                            }
                     }
                     
                 }
@@ -25,6 +32,8 @@ struct Frameworke_Grid_View: View {
             }
             
             .navigationBarTitle("🍎 Frameworks")
+            .sheet(isPresented: $veiwModel.isShowingDetailView) { FrameWorke_DetailVeiw(framework: veiwModel.selectedFrameWork!, isShowingDetailView: $veiwModel.isShowingDetailView)
+            }
         }
         
         
@@ -35,7 +44,7 @@ struct Frameworke_Grid_View: View {
 
 #Preview {
     Frameworke_Grid_View()
-        .preferredColorScheme(.dark)
+        
 }
 
 struct FrameworkeTitle_views: View {
@@ -59,5 +68,4 @@ struct FrameworkeTitle_views: View {
     }
     
 }
-
 

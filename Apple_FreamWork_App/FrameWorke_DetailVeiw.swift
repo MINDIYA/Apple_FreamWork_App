@@ -9,7 +9,10 @@ import Foundation
 
 struct FrameWorke_DetailVeiw: View {
     
+    
     var framework: Framework
+    
+    @Binding var isShowingDetailView: Bool
     
     var body: some View {
         
@@ -18,6 +21,7 @@ struct FrameWorke_DetailVeiw: View {
                 Spacer()
                 
                 Button{
+                    isShowingDetailView = false
                 }label: {
                     Image(systemName: "xmark")
                         .foregroundColor(Color(.label))
@@ -55,6 +59,8 @@ struct FrameWorke_DetailVeiw: View {
         
 
 
-#Preview {
-    FrameWorke_DetailVeiw(framework: MockData.sampleFramework)
+struct FrameWorke_DetailVeiw_Previews: PreviewProvider {
+    static var previews: some View {
+        FrameWorke_DetailVeiw(framework: MockData.sampleFramework, isShowingDetailView: .constant(false))
+    }
 }
