@@ -10,18 +10,16 @@ import SwiftUI
 
 struct Frameworke_Grid_View: View {
     
-    @StateObject private var veiwModel = FrameWorkGridVeiwModel()
+    @StateObject private var veiwModel = FrameWork_GridVeiw_Model()
     
-    let columns: [GridItem] = [GridItem(.flexible()),
-                               GridItem(.flexible()),
-                               GridItem(.flexible())]
+    
     var body: some View {
         
         NavigationView{
             ScrollView{
-                LazyVGrid(columns: columns) {
+                LazyVGrid(columns: veiwModel.columns) {
                     ForEach(MockData.frameworks) { framework in
-                        FrameworkeTitle_views(framework: framework)
+                        Frameworke_Title_views(framework: framework)
                             .onTapGesture {
                                 veiwModel.selectedFrameWork = framework
                             }
@@ -47,25 +45,5 @@ struct Frameworke_Grid_View: View {
         
 }
 
-struct FrameworkeTitle_views: View {
-    
-    let framework: Framework
-    
-    var body: some View {
-        VStack{
-            Image(framework.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 90, height: 90)
-            Text(framework.name)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
-                .padding()
-        }
-        
-    }
-    
-}
+
 

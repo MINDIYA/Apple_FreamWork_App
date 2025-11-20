@@ -13,30 +13,17 @@ struct FrameWorke_DetailVeiw: View {
     var framework: Framework
     
     @Binding var isShowingDetailView: Bool
+    @State private var isShowingSafariView: Bool = false
     
     var body: some View {
         
         VStack{
-            HStack{
-                Spacer()
-                
-                Button{
-                    isShowingDetailView = false
-                }label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(Color(.label))
-                        .imageScale(.large)
-                        .frame(width: 50, height: 50)
-                }
-                    
-                        
-                
-            }
-            .padding()
+            X_Dismiss_Button(isShowingDetailView: $isShowingDetailView)
+            
             
             Spacer()
             
-            FrameworkeTitle_views(framework: framework)
+            Frameworke_Title_views(framework: framework)
             Text(framework.description)
                 .font(.body)
                 .padding()
@@ -44,17 +31,22 @@ struct FrameWorke_DetailVeiw: View {
             Spacer()
             
             Button{
-                
+                isShowingSafariView = true
             } label: {
                 ButtonVeiw(ButtonDescripton: "Learn More")
                 
             }
                 
             }
+        .fullScreenCover(isPresented: $isShowingSafariView, content: {
+            SafariView(url:URL(string: framework.url)!)
+        })
             
         }
             
         }
+            
+        
         
         
 
